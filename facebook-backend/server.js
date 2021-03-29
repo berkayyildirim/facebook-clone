@@ -8,6 +8,8 @@ import bodyParser from "body-parser"
 import path from "path"
 import Pusher from "pusher"
 
+import mongoDB from "./mongoDB"
+
 import mongoPosts from "./postModel.js"
 
 Grid.mongo = mongoose.mongo
