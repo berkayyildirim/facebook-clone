@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { Avatar, Input } from "@material-ui/core"
 import "./MessageSender.css"
+import { useStateValue } from '../StateProvider'
+import firebase from 'firebase'
+import db from '../firebase'
+import axios from '../axios'
+import FormData from 'form-data'
 
 import VideocamIcon from "@material-ui/icons/Videocam"
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary"
@@ -8,23 +13,33 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon"
 
 const MessageSender = () => {
 
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const [image, setImage] = useState(null)
+    const [{ user }, dispatch] = useStateValue()
 
-    const handleChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0])
-        }
-    }
+    console.log(user)
 
-    const handleSubmit=() => {
-        console.log("Submitting")
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        db.collection('posts').add({
+            message: input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            profilePic: user.photoURL,
+            username: user.displayName,
+            image: imageUrl
+        })
+
+        setImageUrl('')
+        setInput('')
+        setImage(null)
     }
 
     return (
         <div className="messageSender">
             <div className="messageSender__top">
-                <Avatar src="https://avatars.githubusercontent.com/u/54432776?v=4" />
+                <Avatar src={user.photoURL} />
                 <form>
                     <input 
                         type="text" 

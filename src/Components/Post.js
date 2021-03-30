@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Post.css"
 import { Avatar } from "@material-ui/core"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
@@ -20,8 +20,17 @@ const Post = ({profilePic, imgName, username, timestamp, message}) => {
 
             <div className="post__bottom">
                 <p>{message}</p>
-                {/* image is coming later */}
             </div>
+
+            {
+                imgName ? (
+                    <div className="post__image">
+                        <img src={`/api/retrieve/images/single?name=${imgName}`} />
+                    </div>
+                ) : (
+                        console.log('DEBUG >>> no image here')
+                    )
+            }
 
             <div className="post__options">
                 <div className="post__option">
