@@ -20,6 +20,12 @@ const MessageSender = () => {
 
     console.log(user)
 
+    const handleChange = (e) => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0])
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 

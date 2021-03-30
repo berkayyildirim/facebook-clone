@@ -25,7 +25,10 @@ const Post = ({profilePic, imgName, username, timestamp, message}) => {
             {
                 imgName ? (
                     <div className="post__image">
-                        <img src={`/api/retrieve/images/single?name=${imgName}`} />
+                        <img   
+                            src={`/api/retrieve/images/single?name=${imgName}`} 
+                            alt="image"
+                            />
                     </div>
                 ) : (
                         console.log('DEBUG >>> no image here')
