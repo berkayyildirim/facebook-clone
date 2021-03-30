@@ -26,7 +26,7 @@ const Post = ({profilePic, imgName, username, timestamp, message}) => {
                 imgName ? (
                     <div className="post__image">
                         <img   
-                            src={`/api/retrieve/images/single?name=${imgName}`} 
+                            src={`http://localhost:9000/retrieve/image/single?name=${imgName}`} 
                             alt="image"
                             />
                     </div>
